@@ -1,0 +1,67 @@
+{% extends 'polls/index.html' %}  {# Extend the base layout from polls/index.html #}
+
+{% block title %}Results | Voting System{% endblock %}  {# Set the page title #}
+
+{% block content %}
+<div class="container py-5">
+
+    {# Display the poll question at the top #}
+    <h1>Poll Results for: {{ poll.question }}</h1>
+    
+    {# If the user has already voted, show their selected choice #}
+    {% if user_vote %}
+        <div class="alert alert-info mb-4">
+            You voted for: <strong>{{ user_vote.vote_choice }}</strong>
+        </div>
+    {% endif %}
+
+    {# If there are votes, display results in a table with visual bars #}
+    {% if total_votes > 0 %}
+        <div class="card mb-4">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0">Total Votes: {{ total_votes }}</h5>  {# Total votes count #}
+            </div>
+            <div class="card-body">
+                <table class="table table-bordered">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Choice</th>         {# Poll choice option #}
+                            <th>Votes</th>          {# Number of votes for the choice #}
+                            <th>Percentage</th>     {# Percentage of total votes #}
+                            <th>Visual</th>         {# Progress bar visualization of percentage #}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for result in results %}
+                            <tr>
+                                <td>{{ result.choice }}</td>
+                                <td>{{ result.count }}</td>
+                                <td>{{ result.percent }}%</td>
+                                <td>
+                                    <div class="progress">
+                                        <div class="progress-bar bg-success" role="progressbar" style="width: {{ result.percent }}%" aria-valuenow="{{ result.percent }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    {% else %}
+        {# Show message if no votes have been cast yet #}
+        <div class="alert alert-warning">
+            <p>No votes have been cast yet for this poll.</p>
+        </div>
+    {% endif %}
+
+    {# Navigation buttons: Back to polls list and Vote now (if user hasn't voted) #}
+    <div class="d-flex gap-2">
+        <a href="{% url 'polls:polls_list' %}" class="btn btn-primary">Back to Polls</a>
+        {% if not user_vote %}
+            <a href="{% url 'polls:vote' poll.id %}" class="btn btn-success">Vote Now</a>
+        {% endif %}
+    </div>
+
+</div>
+{% endblock %}

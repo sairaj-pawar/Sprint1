@@ -1,0 +1,93 @@
+{% extends 'polls/index.html' %}  <!-- Extending index.html -->
+
+{% block title %}Contact Us | Voting System{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow-sm">
+                <div class="card-body p-4">
+                    <h1 class="display-4 text-center mb-4">Contact Us</h1>
+                    
+                    <div class="contact-content">
+                        <p class="lead text-center mb-4">
+                            For any inquiries, support, or feedback, feel free to contact us.
+                        </p>
+                        
+                        <div class="contact-info-section mb-5">
+                            <h3 class="mb-4 text-center">Our Location</h3>
+                            <div class="location-card p-4 mb-4">
+                                <h5>Office Location:</h5>
+                                <p class="text-muted">123 Voting Street, Cityville, State, 12345</p>
+                                <h5>Working Hours:</h5>
+                                <p class="text-muted">Monday - Friday: 9:00 AM - 6:00 PM</p>
+                            </div>
+                        </div>
+
+                        <div class="contact-methods-section mb-5">
+                            <h3 class="text-center mb-4">Ways to Reach Us</h3>
+                            <div class="row justify-content-center">
+                                <div class="col-md-6 mb-4">
+                                    <div class="contact-method-card p-4">
+                                        <h4 class="text-center">Call Us</h4>
+                                        <p class="text-center text-muted">+1 (234) 567-8901</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                    <div class="contact-method-card p-4">
+                                        <h4 class="text-center">Email Us</h4>
+                                        <p class="text-center text-muted">support@votingsystem.com</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="social-media-section text-center">
+                            <h3 class="mb-4">Follow Us</h3>
+                            <a href="#" class="btn btn-primary me-2">Facebook</a>
+                            <a href="#" class="btn btn-info me-2">Twitter</a>
+                            <a href="#" class="btn btn-dark">LinkedIn</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .location-card, .contact-method-card {
+        background: #f8f9fa;
+        border-radius: 8px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+    }
+
+    .location-card:hover, .contact-method-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .contact-info-section h3, .contact-methods-section h3, .social-media-section h3 {
+        font-size: 2rem;
+        font-weight: 600;
+        color: #343a40;
+    }
+
+    .contact-method-card h4 {
+        color: #007bff;
+        margin-bottom: 0.5rem;
+    }
+
+    .contact-method-card p {
+        font-size: 1.2rem;
+        color: #6c757d;
+    }
+
+    .social-media-section .btn {
+        font-size: 1.1rem;
+        padding: 10px 20px;
+    }
+</style>
+
+{% endblock %}

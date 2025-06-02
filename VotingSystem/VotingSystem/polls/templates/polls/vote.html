@@ -1,0 +1,51 @@
+{% extends 'polls/index.html' %}  {# Extend the base template from polls/index.html #}
+
+{% block title %}Vote | Voting System{% endblock %}  {# Set the page title #}
+
+{% block content %}
+<div class="container py-4">
+
+    {# Heading showing the poll title #}
+    <h2>Vote for: {{ poll.title }}</h2>
+    
+    {# Short description of the poll #}
+    <p class="mb-4">{{ poll.description }}</p>
+    
+    <div class="card mb-4">
+        <div class="card-header">
+            {# Display the main poll question #}
+            <h4>{{ poll.question }}</h4>
+        </div>
+        <div class="card-body">
+            {# Voting form with POST method #}
+            <form method="POST">
+                {% csrf_token %}  {# CSRF protection token for form security #}
+                
+                {# Loop through all choices and create radio buttons #}
+                {% for choice in choices %}
+                    <div class="form-check mb-3">
+                        <input 
+                            type="radio"  {# Radio button for each choice #}
+                            class="form-check-input" 
+                            id="choice_{{ choice.id }}"  {# Unique id for label linking #}
+                            name="vote_choice"  {# All radios share this name to select one #}
+                            value="{{ choice.id }}"  {# Value sent on submission #}
+                            required  {# Force user to select one before submitting #}
+                        >
+                        <label class="form-check-label" for="choice_{{ choice.id }}">
+                            {{ choice.choice }}  {# Display the choice text #}
+                        </label>
+                    </div>
+                {% endfor %}
+                
+                <div class="mt-4">
+                    {# Submit button to cast the vote #}
+                    <button type="submit" class="btn btn-primary">Submit Vote</button>
+                    {# Cancel button to go back to polls list #}
+                    <a href="{% url 'polls:polls_list' %}" class="btn btn-secondary">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
